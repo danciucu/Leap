@@ -1,7 +1,7 @@
 import datetime
 import tkinter, ttkthemes, tkinter.filedialog
 
-import globalvars, importdatabase
+import globalvars, importdatabase, upload_notes
 
 class Xtractor(ttkthemes.ThemedTk):
     def __init__(self):
@@ -70,7 +70,11 @@ class Xtractor(ttkthemes.ThemedTk):
         globalvars.username = self.username_entry.get()
         globalvars.password = self.password_entry.get()
         globalvars.root_path = self.import_entry.get()
+        # generate an empty dictionary
+
+        # import Excel file
         # upload notes
+        upload_notes.post_to_BrM()
         #BrMdata.get_previous_data()
 
 

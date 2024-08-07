@@ -1,9 +1,9 @@
 from selenium.webdriver.common.by import By
 from selenium import webdriver
 
-import globalvars, dictionary_datastructure, chrome_driver
+import globalvars, dictionary_datastructure, chrome_driver, import_Excel
 
-class get_previous_data():
+class post_to_BrM():
     def __init__(self):
 
         # import global variables
@@ -22,14 +22,16 @@ class get_previous_data():
         login_driver = driver.find_element(By.ID, "btnSignIn")
         login_driver.click()
         # instantiate the class
-        #bridge_excel = newExcel.field_notes()
+        bridge_excel = import_Excel.field_notes()
 
 
         for i in range(len(globalvars.bridgeID)):
             # generate an empty dictionary
             bridge_dict = dictionary_datastructure.generate_dict()
             # update the dictinary for bridgeID
-            bridge_dict['Structure ID'][1] = globalvars.bridgeID[i]
+            bridge_dict['Structure ID'] = globalvars.bridgeID[i]
+            # import field notes
+            bridge_excel.import_notes(bridge_dict)
             # update the dictionary based on condition page
             #condition_page.get_condition(driver, bridge_dict, i)
             # update the dictionary based on inventory -> design page
