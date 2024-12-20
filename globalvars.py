@@ -1,10 +1,10 @@
 def init():
-    global username, password, bridgeID, user_path, error_message
+    global username, password, bridgeID, main_path, error_message, inspection_date, user_path
 
 username = ""
 password = ""
 bridgeID = []
-root_path = ""
-user_path = ""
+main_path = ""
 error_message = ""
-service = ""
+inspection_date = ""
+user_path = ""

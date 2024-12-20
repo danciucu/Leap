@@ -1,4 +1,5 @@
 import globalvars
+import pandas as pd
 import os
 
 
@@ -8,9 +9,5 @@ class bridgeID():
 
         # import global variables
         globalvars.init()
-
-        try:
-            globalvars.bridgeID = os.listdir(arg)
-            globalvars.error_message = ''
-        except:
-            globalvars.error_message = "Error: Bridge Database Was Not Imported!"
+        # get all bridge IDs
+        globalvars.bridgeID = [name for name in next(os.walk(arg))[1] if '0' in name]

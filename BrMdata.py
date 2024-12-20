@@ -1,9 +1,11 @@
+from selenium.webdriver.chrome.service import Service
+from selenium.webdriver.common.keys import Keys
 from selenium.webdriver.common.by import By
 from selenium import webdriver
 
-import globalvars, dictionary_datastructure, chrome_driver, import_Excel
+import globalvars, dictionary_datastructure, fieldnotes, chrome_driver
 
-class post_to_BrM():
+class post_data():
     def __init__(self):
 
         # import global variables
@@ -21,29 +23,24 @@ class post_to_BrM():
         password_driver.send_keys(globalvars.password)
         login_driver = driver.find_element(By.ID, "btnSignIn")
         login_driver.click()
-        # instantiate the class
-        bridge_excel = import_Excel.field_notes()
 
 
         for i in range(len(globalvars.bridgeID)):
             # generate an empty dictionary
             bridge_dict = dictionary_datastructure.generate_dict()
+            print(globalvars.bridgeID[i])
+            # import the field notes
+            field_notes = fieldnotes.get_data(i, bridge_dict)
+            if i == 0:
+                break
+            # generate an empty dictionary
+            #bridge_dict = dictionary_datastructure.generate_dict()
             # update the dictinary for bridgeID
-            bridge_dict['Structure ID'] = globalvars.bridgeID[i]
-            # import field notes
-            bridge_excel.import_notes(bridge_dict)
+            #bridge_dict['Structure ID'][1] = globalvars.bridgeID[i]
             # update the dictionary based on condition page
-            #condition_page.get_condition(driver, bridge_dict, i)
-            # update the dictionary based on inventory -> design page
-            #inventory_design_page.get_design_info(driver, bridge_dict, i)
-            # update the dictionary based on work candidates page
-            #work_candidates.get_work_items(driver, bridge_dict, i)
-            # update the dictionary based on summary & miscellaneous page
-            #summary_miscellaneous_page.get_miscellaneous(driver, bridge_dict, i)
-            # update the dictionary based on weights page
-            #weights_page.get_posting(driver, bridge_dict, i)
+            #get_condition.main(driver, bridge_dict, i)
             # create the Excel field note
-            #bridge_excel.create(bridge_dict)
+            #newExcel.field_notes.create(bridge_dict)
 
 
 

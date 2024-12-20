@@ -1,15 +1,14 @@
-import datetime
 import tkinter, ttkthemes, tkinter.filedialog
 
-import globalvars, importdatabase, upload_notes
+import globalvars, importdatabase, BrMdata
 
-class Xtractor(ttkthemes.ThemedTk):
+class Injection(ttkthemes.ThemedTk):
     def __init__(self):
         super().__init__()
 
         # configure the root window
-        self.title('Leap')
-        self.geometry('500x200')
+        self.title('Inject')
+        self.geometry('500x400')
         self.set_theme('radiance')
         # define a frame
         self.main_frame = tkinter.ttk.Frame(self)
@@ -27,22 +26,21 @@ class Xtractor(ttkthemes.ThemedTk):
         self.password_entry = tkinter.ttk.Entry(self.main_frame, width = 30, state = tkinter.NORMAL, show = '*')
         self.password_entry.grid(row = 4, column = 1)
         ## label for importing data
-        self.import_label = tkinter.ttk.Label(self.main_frame, text = 'Select the NBIS folder with the bridge IDs')
+        self.import_label = tkinter.ttk.Label(self.main_frame, text = 'Select Folder that Contains the Field Notes')
         self.import_label.grid(row = 5, column = 1)
         ## entry for importing data
         self.import_entry = tkinter.ttk.Entry(self.main_frame, width = 40, state = tkinter.NORMAL)
         self.import_entry.grid(row = 6, column = 1)
         ## button for importing data
-        self.import_button = tkinter.ttk.Button(self.main_frame, text = '...', state = tkinter.NORMAL, command = self.folder_import, width = 2)
-        self.import_button.grid(row = 6, column = 2) 
+        self.import_button = tkinter.ttk.Button(self.main_frame, text = '...', state = tkinter.NORMAL, command = self.import_ids, width = 2)
+        self.import_button.grid(row = 6, column = 2)
         ## button for starting the process
-        self.start_button = tkinter.ttk.Button(self.main_frame, text = 'Start', command = self.upload_notes, state = tkinter.NORMAL, width = 4)
-        self.start_button.grid(row = 7, column = 1)
-
+        self.start_button = tkinter.ttk.Button(self.main_frame, text = 'Start', command = self.update_BrM, state = tkinter.NORMAL, width = 4)
+        self.start_button.grid(row = 7, column = 1) 
 
 
     # define function that imports the Excel file
-    def folder_import(self):
+    def import_ids(self):
         # variable that handles the Excel path
         path = tkinter.filedialog.askdirectory()
         # fill entry bar with the path
@@ -61,23 +59,31 @@ class Xtractor(ttkthemes.ThemedTk):
             elif count == 3:
                 j = k - 1
                 break
+        # update the globalvars
         globalvars.user_path = path[i:j]
+        globalvars.main_path = path
+
+    # define function that imports the Excel file
+    def get_fielnotes_path(self):
+        # variable that handles the Excel path
+        folder_path = tkinter.filedialog.askdirectory()
+        # fill entry bar with the path
+        self.fieldnotes_entry.insert(tkinter.END, folder_path)
+        # update the globalvars
+        globalvars.main_path = folder_path
 
 
-    # define function that downalods files from NBIS website
-    def upload_notes(self):
-        # update username, password and root path
+    # use the field notes to update BrM data
+    def update_BrM(self):
+        # update username and password
         globalvars.username = self.username_entry.get()
         globalvars.password = self.password_entry.get()
-        globalvars.root_path = self.import_entry.get()
-        # generate an empty dictionary
-
-        # import Excel file
-        # upload notes
-        upload_notes.post_to_BrM()
-        #BrMdata.get_previous_data()
+        # get the date inputed by user
+        #globalvars.inspection_date = self.date_entry.get()
+        # update BrM with new data
+        BrMdata.post_data()
 
 
 if __name__ == "__main__":
-    app = Xtractor()
+    app = Injection()
     app.mainloop()

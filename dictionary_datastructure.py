@@ -1,37 +1,17 @@
 def generate_dict():
     brm_dict = {
-        # from Info, NBI, WOrk
-        'Inspector': [[2, 2],''],
-        #'Work Items Description': [[], []],
-        #'Work Items Action': [[], []],
-        #'Work Items Priority': [[], []],
-        #'Work Items Responsibility': [[], []],
-        # from BrM Condition Page
-        'Structure ID': '',
-        #'Date': [[4, 2], ''],
-        #'Route #': [[7, 2], ''],
-        #'Bridge/Culvert': [[14, 2], ''],
-        #'B.C.01 (Deck) (Item 58)': [[25, 2], ''],
-        #'B.C.02 (Superstructure) (Item 59)': [[28, 2], ''],
-        #'B.C.03 (Substructure) (Item 60)': [[31, 2], ''],
-        #'B.C.04 (Culverts) (Item 62)': [[34, 2], ''],
-        #'B.C.09 (Channel) (Item 61)': [[49, 2], ''],
-        #'B.AP.02 (Overtopping Likelihood) (Item 71 - Waterway Adequacy)': [[55, 2], ''],
-        #'Scour Observed': [[20, 5], ''],
-        #'No of Spans': [[15, 2], ''],
-        #'Required Posting': [[9, 5], ''],
-        #'Posting Values': [[[12, 5], [13, 5], [14, 5], [15, 5], [16, 5], [17, 5], [18, 5], [19, 5]], []],
-        #'Inspection Type': [[5, 2], ''],
-        #'Inspection Frequency': [[5, 3], ''],
-        'Elements': [],
-        'Total Quantity': [],
-        'Defects': [],
-        # first array is for total quantity and the second is for defects
-        'CS1': [[], []],
-        'CS2': [[], []],
-        'CS3': [[], []],
-        'CS4': [[], []],
-        'Description': [],
+        'Date': [[4, 5], ''],
+        'Bridge/Culvert': [[14, 2], ''],
+        'B.C.01 (Deck) (Item 58)': [[25, 3], ''],
+        'B.C.02 (Superstructure) (Item 59)': [[28, 3], ''],
+        'B.C.03 (Substructure) (Item 60)': [[31, 3], ''],
+        'B.C.04 (Culverts) (Item 62)': [[34, 3], ''],
+        'B.C.09 (Channel) (Item 61)': [[49, 3], ''],
+        'Scour Observed': [[20, 5], ''],
+        'Work Items': {'Description': [], 'Action': [], 'Priority': [], 'Responsibility': [], 'Comment/Concurrence': []},
+        'Structure Notes': [[72, 10], ''],
+        'Inspection Notes': [[75, 10], ''],
+        'Elements': ''
     }
 
     return brm_dict
